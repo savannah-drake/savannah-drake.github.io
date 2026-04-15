@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Savannah Drake | Technical Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="assets/images/portfolio.png" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="site-header">
+    <nav class="nav">
+      <div class="brand">
+        <div class="brand-dot"></div>
+        <span>savannah.drake</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="toggle-track">
+          <span class="toggle-thumb"></span>
+        </span>
+        <span class="toggle-label">Dark</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-left">
+        <p class="eyebrow">TECHNICAL PORTFOLIO</p>
+        <h1>
+          I build <span>data-driven</span> and
+          polished digital experiences.
+        </h1>
+        <p class="hero-copy">
+          I'm Savannah, focused on AI/ML, data science, and product development. I build data-driven tools and applications that turn complex datasets into actionable insights and decision-support systems. My work combines analytics, engineering, and product thinking to solve real-world problems.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#skills" class="btn btn-secondary">Explore Skills</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-number">7+</span>
+            <span class="stat-label">Core Tools</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Featured Projects</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">DS + SWE</span>
+            <span class="stat-label">Focus Areas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-panel glass-card">
+          <div class="panel-top">
+            <span class="status-pill">Actively looking for internships</span>
+            <span class="panel-chip">Data & Decisions Sciences</span>
+          </div>
+
+          <div class="code-window">
+            <div class="editor-tabs">
+              <button class="tab active" data-tab="profile.js">profile.js</button>
+              <button class="tab" data-tab="skills.json">skills.json</button>
+              <button class="tab" data-tab="projects.py">projects.py</button>
+            </div>
+
+            <div class="code-header">
+              <span></span><span></span><span></span>
+            </div>
+
+            <div class="code-panel active" id="profile.js">
+              <pre><code id="typed-code"></code></pre>
+            </div>
+
+            <div class="code-panel" id="skills.json">
+<pre><code>
+<div class="code-line"><span class="bracket">{</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="prop">"languages"</span>: [<span class="str">"Python"</span>, <span class="str">"SQL"</span>, <span class="str">"R"</span>, <span class="str">"Java"</span>, <span class="str">"JavaScript"</span>],</div>
+<div class="code-line">&nbsp;&nbsp;<span class="prop">"libraries"</span>: [<span class="str">"pandas"</span>, <span class="str">"NumPy"</span>, <span class="str">"scikit-learn"</span>, <span class="str">"geopandas"</span>, <span class="str">"matplotlib"</span>],</div>
+<div class="code-line">&nbsp;&nbsp;<span class="prop">"tools"</span>: [<span class="str">"Snowflake"</span>, <span class="str">"Streamlit"</span>, <span class="str">"Power BI"</span>, <span class="str">"Excel"</span>, <span class="str">"Git/GitHub"</span>, <span class="str">"Docker"</span>, <span class="str">"VS Code"</span>],</div>
+<div class="code-line">&nbsp;&nbsp;<span class="prop">"focus"</span>: [<span class="str">"predictive modeling"</span>, <span class="str">"data visualization"</span>, <span class="str">"geospatial analysis"</span>, <span class="str">"software design"</span>]</div>
+<div class="code-line"><span class="bracket">}</span></div>
+</code></pre>
+            </div>
+
+            <div class="code-panel" id="projects.py">
+<pre><code>
+<div class="code-line"><span class="kw">featured_projects</span> = [</div>
+<div class="code-line">&nbsp;&nbsp;<span class="str">"american_airlines_delay_prediction"</span>,</div>
+<div class="code-line">&nbsp;&nbsp;<span class="str">"invest_atlanta_fresh_food_access"</span>,</div>
+<div class="code-line">&nbsp;&nbsp;<span class="str">"fifa_2026_transit_access_analysis"</span>,</div>
+<div class="code-line">&nbsp;&nbsp;<span class="str">"machine_learning_methods_lab"</span></div>
+<div class="code-line">]</div>
+<div class="code-line"></div>
+<div class="code-line"><span class="kw">for</span> project <span class="kw">in</span> featured_projects:</div>
+<div class="code-line">&nbsp;&nbsp;<span class="func">print</span>(project)</div>
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-heading">
+        <p class="eyebrow">CAPABILITIES</p>
+        <h2>Technical Skills</h2>
+        <p>
+          A focused toolkit across programming, analytics, modeling, and development workflows.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <article class="glass-card skill-card">
+          <div class="card-icon">01</div>
+          <h3>Languages</h3>
+          <p>Python, SQL, R, Java, JavaScript, HTML, CSS</p>
+        </article>
+
+        <article class="glass-card skill-card">
+          <div class="card-icon">02</div>
+          <h3>Data & Modeling</h3>
+          <p>pandas, NumPy, scikit-learn, predictive modeling, statistical modeling, data cleaning</p>
+        </article>
+
+        <article class="glass-card skill-card">
+          <div class="card-icon">03</div>
+          <h3>Analytics & Visualization</h3>
+          <p>Tableau, Power BI, Streamlit, Excel, matplotlib, geopandas, geospatial analysis, reporting</p>
+        </article>
+
+        <article class="glass-card skill-card">
+          <div class="card-icon">04</div>
+          <h3>Tools & Workflow</h3>
+          <p>Snowflake, Git/GitHub, Docker, VS Code, APIs, technical documentation, DevOps</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <p class="eyebrow">SELECTED WORK</p>
+        <h2>Selected Work</h2>
+        <p>
+          A selection of technical and data-driven projects across machine learning,
+          geospatial analysis, and product-focused development.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card glass-card expandable">
+          <div class="project-top">
+            <span class="project-badge">Machine Learning</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>American Airlines Delay Prediction</h3>
+          <p>
+            Developed a machine learning application to predict American Airlines flight delays using operational and route-level data. Translated model outputs into an interactive decision-support tool, allowing users to evaluate how factors like departure timing, airport congestion, and route patterns influence delay risk.
+          </p>
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>SQL</span>
+            <span>Snowflake</span>
+            <span>Machine Learning</span>
+          </div>
+          <div class="project-links">
+          <a href="https://b2-american-airlines-delay-prediction-project-model.streamlit.app/" target="_blank" class="btn btn-primary">
+          View Live App →
+          </a>
+        </div>
+          <div class="project-details">
+            <div class="project-image">
+            </div>
+            <div class="project-extra">
+            </div>
+          </div>
+        </article>
+<article class="project-card glass-card expandable">
+  <div class="project-top">
+    <span class="project-badge">Full-Stack Product Development</span>
+    <span class="project-year">2026</span>
+  </div>
+  <h3>SprintWheel</h3>
+ <p>
+  Designed and built a full-stack agile project management platform to streamline sprint planning, backlog organization, and deadline tracking. Focused on usability and workflow clarity, enabling teams to manage product development cycles more intuitively and efficiently.
+</p>
+  <div class="tech-stack">
+    <span>React</span>
+    <span>TypeScript</span>
+    <span>FastAPI</span>
+    <span>Supabase</span>
+  </div>
+
+  <div class="project-links">
+    <a href="https://sprintwheel-frontend.vercel.app" target="_blank" rel="noopener noreferrer"  class="btn btn-primary">
+      View Live App →
+    </a>
+  </div>
+
+  <div class="project-details">
+    <div class="project-image">
+    </div>
+    <div class="project-extra">
+    </div>
+  </div>
+</article>
+
+        <article class="project-card glass-card expandable">
+          <div class="project-top">
+            <span class="project-badge">Geospatial Analytics</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>Invest Atlanta Fresh Food Access Optimization</h3>
+          <p>
+            <p>
+          Integrated multiple geospatial and socioeconomic datasets to identify high-priority Atlanta census tracts with limited fresh food access. Produced tract-level insights to support data-driven decisions around food infrastructure investment and community resource allocation.
+          </p>
+          </p>
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>Geospatial Data</span>
+            <span>Data Integration</span>
+            <span>Analysis</span>
+          </div>
+          <div class="project-status">
+            🚧 In Progress
+          </div>
+          <div class="project-details">
+            <div class="project-extra">
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card glass-card expandable">
+          <div class="project-top">
+            <span class="project-badge">Urban Data Analysis</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>FIFA 2026 Transit Access & Investment Analysis</h3>
+          <p>
+            Analyzed transit accessibility and patterns of business disinvestment across Atlanta neighborhoods near Mercedes-Benz Stadium ahead of the 2026 FIFA World Cup. Combined geospatial data on transit, business activity, and neighborhood boundaries to surface areas with high demand but limited access, informing potential investment and development opportunities.
+          </p>
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>Geopandas</span>
+            <span>GIS</span>
+            <span>Predictive Modeling</span>
+          </div>
+          <div class="project-links">
+          <a href="assets/images/FIFA26_DisinvestmentProject.png" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          View Poster →
+        </a>
+          </div>
+          <div class="project-details">
+            <div class="project-extra">
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card glass-card expandable">
+          <div class="project-top">
+            <span class="project-badge">Personal Project</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>Machine Learning Methods Lab</h3>
+          <p>
+            Explored regression, classification, and clustering techniques to evaluate model performance and tradeoffs across different datasets. Built a series of experiments to strengthen understanding of model selection, evaluation metrics, and practical machine learning workflows.
+          </p>
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>scikit-learn</span>
+            <span>Pandas</span>
+            <span>Jupyter</span>
+          </div>
+          <div class="project-status">
+            🚧 In Progress
+          </div>
+          <div class="project-details">
+            <div class="project-extra">
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section class="section" id="ai-assistant">
+  <div class="section-heading">
+    <p class="eyebrow">PORTFOLIO ASSISTANT</p>
+    <h2>Ask Savannah.AI💬</h2>
+<p>
+  Your quick guide to my projects, tools, and what I actually built.
+</p>
+  </div>
+
+  <div class="glass-card ai-card">
+    <div class="ai-input-row">
+      <input
+        type="text"
+        id="portfolio-question"
+        placeholder="Ask about my projects, skills, or tools..."
+      />
+      <button id="ask-btn" class="btn btn-primary">Ask</button>
+    </div>
+
+    <div id="ai-response" class="ai-response">
+      Try asking: “What did you build for the airline project?”
+    </div>
+  </div>
+</section>
+    <section class="section" id="contact">
+      <div class="contact-panel glass-card">
+        <div>
+          <p class="eyebrow">CONTACT</p>
+          <h2>Let’s Connect</h2>
+          <p>
+            Open to opportunities, take a look at my work and reach out!
+          </p>
+        </div>
+
+        <div class="contact-links">
+          <a href="https://outlook.office.com/mail/deeplink/compose?to=drakesavannah1004@outlook.com&subject=Let's%20Connect&body=Hi%20Savannah%2C%20I%20came%20across%20your%20portfolio..." target="_blank" rel="noopener noreferrer">
+            Email
+          </a>
+          <a href="https://github.com/savannah-drake" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/savannahdrake10/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="assets/docs/savannah-drake-resume.pdf" target="_blank" rel="noopener noreferrer">
+            Resume
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
