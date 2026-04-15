@@ -701,7 +701,55 @@ body.dark .toggle-thumb {
   color: var(--text);
   transform: translateY(-1px);
 }
+  .cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 520px;
+    margin: 0 auto;
+    background: #111;
+    color: #fff;
+    padding: 16px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 9999;
+  }
 
+  .cookie-banner p {
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+    font-size: 14px;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .cookie-actions button {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  #accept-cookies {
+    background: #fff;
+    color: #111;
+  }
+
+  #reject-cookies {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+  }
+
+  .hidden {
+    display: none;
+  }
 
 @keyframes blink {
   50% {

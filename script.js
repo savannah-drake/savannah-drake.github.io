@@ -48,7 +48,52 @@ tabs.forEach(tab => {
     document.getElementById(target).classList.add("active");
   });
 });
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("accept-cookies");
+  const rejectBtn = document.getElementById("reject-cookies");
 
+  const savedConsent = localStorage.getItem("site_consent_choice");
+
+  function hideBanner() {
+    banner.classList.add("hidden");
+  }
+
+  function showBanner() {
+    banner.classList.remove("hidden");
+  }
+
+  function grantConsent() {
+    gtag('consent', 'update', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    localStorage.setItem("site_consent_choice", "accepted");
+    hideBanner();
+  }
+
+  function denyConsent() {
+    gtag('consent', 'update', {
+      analytics_storage: 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    localStorage.setItem("site_consent_choice", "rejected");
+    hideBanner();
+  }
+
+  if (!savedConsent) {
+    showBanner();
+  } else if (savedConsent === "accepted") {
+    grantConsent();
+  } else {
+    denyConsent();
+  }
+
+  acceptBtn.addEventListener("click", grantConsent);
+  rejectBtn.addEventListener("click", denyConsent);
 
 // ======================
 // TYPING EFFECT (profile.js)
