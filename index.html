@@ -79,7 +79,7 @@
             <span class="stat-label">Core Tools</span>
           </div>
           <div class="stat-card">
-            <span class="stat-number">5</span>
+            <span class="stat-number">6</span>
             <span class="stat-label">Featured Projects</span>
           </div>
           <div class="stat-card">
@@ -127,8 +127,10 @@
 <div class="code-line"><span class="kw">featured_projects</span> = [</div>
 <div class="code-line">&nbsp;&nbsp;<span class="str">"american_airlines_delay_prediction"</span>,</div>
 <div class="code-line">&nbsp;&nbsp;<span class="str">"invest_atlanta_fresh_food_access"</span>,</div>
+<div class="code-line">&nbsp;&nbsp;<span class="str">"sprintwheel_full_stack_product_development"</span></div>
 <div class="code-line">&nbsp;&nbsp;<span class="str">"fifa_2026_transit_access_analysis"</span>,</div>
 <div class="code-line">&nbsp;&nbsp;<span class="str">"machine_learning_methods_lab"</span></div>
+<div class="code-line">&nbsp;&nbsp;<span class="str">"trend2campaign_reccomendation_engine"</span></div>
 <div class="code-line">]</div>
 <div class="code-line"></div>
 <div class="code-line"><span class="kw">for</span> project <span class="kw">in</span> featured_projects:</div>
@@ -203,8 +205,11 @@
             <span>Machine Learning</span>
           </div>
           <div class="project-links">
-          <a href="https://b2-american-airlines-delay-prediction-project-model.streamlit.app/" target="_blank" class="btn btn-primary">
+          <a href="https://b2-american-airlines-disruption-risk.streamlit.app/" target="_blank" class="btn btn-primary">
           View Live App →
+          </a>
+          <a href="assets/images/flight_ops_dashboard.png" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          View Poster →
           </a>
         </div>
           <div class="project-details">
@@ -261,8 +266,13 @@
             <span>Data Integration</span>
             <span>Analysis</span>
           </div>
-          <div class="project-status">
-            🚧 In Progress
+          <div class="project-links">
+          <a href="https://fresh-food-access-dashboard.streamlit.app/" target="_blank" rel="noopener noreferrer"  class="btn btn-primary">
+          View Live App →
+        </a>
+        <a href="assets/images/ffa_dashboard.png" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          View Poster →
+        </a>
           </div>
           <div class="project-details">
             <div class="project-extra">
@@ -301,9 +311,9 @@
             <span class="project-badge">Personal Project</span>
             <span class="project-year">2026</span>
           </div>
-          <h3>Machine Learning Methods Lab</h3>
+          <h3>Machine Learning Analysis</h3>
           <p>
-            Explored regression, classification, and clustering techniques to evaluate model performance and tradeoffs across different datasets. Built a series of experiments to strengthen understanding of model selection, evaluation metrics, and practical machine learning workflows.
+          Explored regression, classification, and clustering by building a modular pipeline to compare how each method performs on the same data. Focused on understanding model tradeoffs and translating results into clear visual insights and outputs.
           </p>
           <div class="tech-stack">
             <span>Python</span>
@@ -311,8 +321,35 @@
             <span>Pandas</span>
             <span>Jupyter</span>
           </div>
-          <div class="project-status">
-            🚧 In Progress
+          <div class="project-links">
+          <a href="https://savannah-drake-ml-analysis-pipeline-app-m4mgao.streamlit.app/" target="_blank" rel="noopener noreferrer"  class="btn btn-primary">
+          View Live App →
+        </a>
+          </div>
+          <div class="project-details">
+            <div class="project-extra">
+            </div>
+          </div>
+        </article>
+         <article class="project-card glass-card expandable">
+          <div class="project-top">
+            <span class="project-badge">Personal Project</span>
+            <span class="project-year">2026</span>
+          </div>
+          <h3>Trend-to-Campaign Recommendation Engine</h3>
+          <p>Building a recommendation engine that translates real-time cultural trends into actionable marketing strategies. The tool maps social signals (TikTok, Google Trends, etc.) to product categories, audience segments, and campaign concepts for consumer brands.</p>
+          <p>🚧 In Progress</p>
+         
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>Streamlit</span>
+            <span>APIs/scraping</span>
+            <span>Basic NLP</span>
+          </div>
+          <div class="project-links">
+          <a href="assets/images/framework.png" target="_blank" rel="noopener noreferrer"  class="btn btn-primary"  >
+          See How It Works →
+        </a>
           </div>
           <div class="project-details">
             <div class="project-extra">
@@ -332,11 +369,15 @@
 
   <div class="glass-card ai-card">
     <div class="ai-input-row">
-      <input
-        type="text"
-        id="portfolio-question"
-        placeholder="Ask about my projects, skills, or tools..."
-      />
+     <div class="autocomplete-container">
+  <input
+    type="text"
+    id="portfolio-question"
+    placeholder="Ask about my projects, experience, skills, or fit..."
+    autocomplete="off"
+  />
+  <div id="suggestions-dropdown" class="suggestions-dropdown hidden"></div>
+</div>
       <button id="ask-btn" class="btn btn-primary">Ask</button>
     </div>
 
