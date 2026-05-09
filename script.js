@@ -224,7 +224,7 @@ const portfolioAnswers = [
   },
 
   {
-    keywords: ["machine learning", "ml", "models"],
+    keywords: [ "ml", "models"],
     answer:
       "I’ve worked with regression, classification, clustering, and model evaluation, but I focus on making models usable. That means turning outputs into dashboards, decision tools, or systems that people can actually interact with—not just static results."
   },
@@ -268,6 +268,11 @@ const portfolioAnswers = [
     keywords: ["resume", "linkedin", "profile"],
     answer:
       "My resume and LinkedIn highlight a mix of technical depth and applied experience across machine learning, geospatial analytics, and product development. I focus on building systems that connect data to real-world decisions, especially in areas like infrastructure, operations, and consumer behavior."
+  },
+  {
+    keywords:["spotify", "clustering", "music", "audio features", "python", "machine learning","scikit-learn"],
+    answer:
+      "I worked on a Spotify playlist clustering project using Python and scikit-learn. The goal was to group songs based on their audio features and user listening behavior, which could help improve recommendation algorithms."
   }
 ];
 const recruiterModeToggle = document.getElementById("recruiter-mode");
