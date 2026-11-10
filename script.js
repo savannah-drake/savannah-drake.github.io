@@ -1,335 +1,198 @@
-// ======================
-// THEME TOGGLE
-// ======================
-const toggleButton = document.getElementById("theme-toggle");
-const toggleLabel = document.querySelector(".toggle-label");
-const body = document.body;
-
-function applyTheme(theme) {
-  if (theme === "dark") {
-    body.classList.add("dark");
-    toggleLabel.textContent = "Light";
-  } else {
-    body.classList.remove("dark");
-    toggleLabel.textContent = "Dark";
-  }
-}
-
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme) {
-  applyTheme(savedTheme);
-} else {
-  applyTheme("dark");
-}
-
-toggleButton.addEventListener("click", () => {
-  const isDark = body.classList.contains("dark");
-  const newTheme = isDark ? "light" : "dark";
-  localStorage.setItem("theme", newTheme);
-  applyTheme(newTheme);
-});
-
-
-// ======================
-// CODE TAB SWITCHING
-// ======================
-const tabs = document.querySelectorAll(".tab");
-const panels = document.querySelectorAll(".code-panel");
-
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    const target = tab.getAttribute("data-tab");
-
-    tabs.forEach(t => t.classList.remove("active"));
-    panels.forEach(p => p.classList.remove("active"));
-
-    tab.classList.add("active");
-    document.getElementById(target).classList.add("active");
-  });
-});
-  const banner = document.getElementById("cookie-banner");
-  const acceptBtn = document.getElementById("accept-cookies");
-  const rejectBtn = document.getElementById("reject-cookies");
-
-  const savedConsent = localStorage.getItem("site_consent_choice");
-
-  function hideBanner() {
-    banner.classList.add("hidden");
-  }
-
-  function showBanner() {
-    banner.classList.remove("hidden");
-  }
-
-  function grantConsent() {
-    gtag('consent', 'update', {
-      analytics_storage: 'granted',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
-    });
-    localStorage.setItem("site_consent_choice", "accepted");
-    hideBanner();
-  }
-
-  function denyConsent() {
-    gtag('consent', 'update', {
-      analytics_storage: 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
-    });
-    localStorage.setItem("site_consent_choice", "rejected");
-    hideBanner();
-  }
-
-  if (!savedConsent) {
-    showBanner();
-  } else if (savedConsent === "accepted") {
-    grantConsent();
-  } else {
-    denyConsent();
-  }
-
-  acceptBtn.addEventListener("click", grantConsent);
-  rejectBtn.addEventListener("click", denyConsent);
-
-// ======================
-// TYPING EFFECT (profile.js)
-// ======================
-const codeElement = document.getElementById("typed-code");
-
-const profileLines = [
-  '<div class="code-line"><span class="kw">const</span> <span class="var">profile</span> = <span class="bracket">{</span></div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="prop">name</span>: <span class="str">"Savannah Drake"</span>,</div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="prop">major</span>: <span class="str">"Data & Decisions Sciences"</span>,</div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="prop">track</span>: <span class="str">"Informatics"</span>,</div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="prop">graduation</span>: <span class="str">"May 2027"</span>,</div>',
-  '<div class="code-line"></div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="prop">interests</span>: <span class="bracket">[</span></div>',
-  '<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"data analysis"</span>,</div>',
-  '<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"machine learning"</span>,</div>',
-  '<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"geospatial analysis"</span>,</div>',
-  '<div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"software design"</span></div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="bracket">]</span>,</div>',
-  '<div class="code-line"></div>',
-  '<div class="code-line">&nbsp;&nbsp;<span class="prop">building</span>: <span class="str">"AI-powered, data-driven products and decision tools"</span></div>',
-  '<div class="code-line"><span class="bracket">}</span>;</div>'
+/* Project data. `file` is the name shown on the card; `ext` fills the preview when there's no image. */
+const projects = [
+ {id:'airlines',file:'delay_risk_model.py',ext:'.py',name:'American Airlines Delay Prediction',category:'machine learning',kind:'Machine learning app',short:'Which flight sequences are likely to be disrupted, and why.',desc:'I led a 4-person team working with an American Airlines stakeholder to predict flight-sequence disruptions from flight, crew and weather data. We turned the model results (AUC around 0.66) into a decision-support app that dispatchers and analysts can actually read.',tags:['Python','XGBoost','scikit-learn','NumPy','SQL','Snowflake','Streamlit'],image:'https://savannah-drake.github.io/assets/images/flight_ops_dashboard.png',link:'https://b2-american-airlines-disruption-risk.streamlit.app/',secondary:'https://savannah-drake.github.io/assets/images/flight_ops_dashboard.png',secondaryText:'View the poster',color:'peach'},
+ {id:'sprintwheel',file:'sprintwheel.tsx',ext:'.tsx',name:'SprintWheel',category:'full stack',kind:'Full-stack web app',short:'Sprint planning, backlog and deadlines in one place.',desc:'A full-stack agile project management app for planning sprints, organizing a backlog and keeping track of deadlines.',tags:['React','TypeScript','FastAPI','Supabase'],link:'https://sprintwheel-frontend.vercel.app/',color:'lavender'},
+ {id:'freshfood',file:'fresh_food_access.geojson',ext:'.geojson',name:'Invest Atlanta Fresh Food Access',category:'geospatial',kind:'Geospatial dashboard',award:'Best Project Poster, Emory AI/Data Lab Symposium',short:'Atlanta neighborhoods with high need and few places to buy fresh food.',desc:'An interactive dashboard with maps, filters and tract-level KPIs across 211 Atlanta census tracts. I built a food-access need index from 8,000+ records covering SNAP participation, poverty, food retail and MARTA access, then used it to flag 53 tracts for targeted investment.',tags:['Python','pandas','GeoPandas','Matplotlib','Streamlit'],image:'https://savannah-drake.github.io/assets/images/ffa_dashboard.png',link:'https://fresh-food-access-dashboard.streamlit.app/',photo:'images/fresh-food-presenting.jpg',photoCaption:'Presenting at Emory\'s AI/Data Lab Symposium, where it won Best Project Poster.',secondary:'https://savannah-drake.github.io/assets/images/ffa_dashboard.png',secondaryText:'View the poster',color:'green'},
+ {id:'fifa',file:'fifa26_transit.geojson',ext:'.geojson',name:'FIFA 2026 Transit & Investment',category:'geospatial',kind:'Research poster',short:'Which Atlanta neighborhoods to invest in before the World Cup.',desc:'Random Forest ridership models combined with an analysis of MARTA access and business disinvestment around Mercedes-Benz Stadium. The result: 5 priority Neighborhood Statistical Areas for World Cup 2026 investment planning, built with Invest Atlanta.',tags:['Python','Random Forest','GeoPandas','GIS'],image:'https://savannah-drake.github.io/assets/images/FIFA26_DisinvestmentProject.png',link:'https://savannah-drake.github.io/assets/images/FIFA26_DisinvestmentProject.png',linkText:'View the poster',color:'blue'},
+ {id:'ml',file:'ml_pipeline.ipynb',ext:'.ipynb',name:'Machine Learning Analysis',category:'machine learning',kind:'Modeling pipeline',short:'Regression, classification and clustering, compared side by side.',desc:'A modular pipeline for comparing models and explaining the tradeoffs between them in plain terms.',tags:['Python','scikit-learn','Jupyter','Streamlit'],link:'https://savannah-drake-ml-analysis-pipeline-app-m4mgao.streamlit.app/',color:'yellow'},
+ {id:'spotify',file:'spotify_clusters.py',ext:'.py',name:'Spotify Audio Clustering',category:'machine learning',kind:'Unsupervised learning app',short:'Grouping songs by how they actually sound.',desc:'Clusters songs by their audio features, then lets you explore which tracks and genres end up sounding alike.',tags:['Python','K-means','Streamlit'],link:'https://savannah-drake--spotify-audio-clustering-app-8d3lfi.streamlit.app/',color:'pink'}
 ];
 
-let lineIndex = 0;
+const sections = {
+ projects:{title:'projects',crumb:'Projects',status:'Click a project to see the details.'},
+ about:{title:'about_me',crumb:'About me',status:'Scroll down, then pass or check at the bottom.',count:'1 profile'},
+ experience:{title:'experience',crumb:'Experience',status:'Last updated November 2026.',count:'4 items'},
+ skills:{title:'toolkit',crumb:'Toolkit',status:'Project names open the project.',count:'1 file'},
+ contact:{title:'new message',crumb:'Contact',status:'Sends from your own email app.',count:''},
+ video:{title:'ootd_internship_edition.mov',crumb:'ootd_internship_edition.mov',status:'OOTD: internship edition.',count:'1 file'},
+ trash:{title:'trash',crumb:'Trash',status:'Emptying the trash is disabled. These stay as a reminder.',count:'4 items'}
+};
+const EMAIL='sidrake10@outlook.com';
 
-function typeLine() {
-  if (lineIndex < profileLines.length) {
-    codeElement.innerHTML += profileLines[lineIndex];
-    lineIndex++;
-    setTimeout(typeLine, 120);
-  }
+const win=document.getElementById('app-window'),content=document.getElementById('window-content'),title=document.getElementById('window-title'),crumb=document.getElementById('breadcrumb'),count=document.getElementById('toolbar-count'),status=document.getElementById('status-description');
+let current='home',selected=null,filter='all',history=[];
+let aboutSeen=false,sequenceTimers=[],activeDialog=null,lastTrigger=null;
+
+function escapeHtml(str){return String(str).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const reducedMotion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function openSection(section,save=true){
+ win.querySelector('.match-toast')?.remove();
+ if(section==='home'){closeAll();return;}
+ if(!sections[section])section='projects';
+ if(section!=='about')clearSequence();
+ if(save&&current!==section&&current!=='home')history.push(current);
+ current=section;selected=null;
+ win.classList.add('is-active');win.focus({preventScroll:true});
+ const s=sections[section];
+ title.textContent=s.title;crumb.textContent='Desktop / '+s.crumb;count.textContent=s.count||'';status.textContent=s.status;
+ const frag=document.getElementById(section+'-template').content.cloneNode(true);
+ if(section==='about')wirePhotos(frag);
+ content.querySelectorAll('video').forEach(v=>v.pause());
+ content.replaceChildren(frag);content.scrollTop=0;
+ if(section==='projects')renderProjects();
+ if(section==='contact')wireCompose();
+ if(section==='about'&&!aboutSeen)startAboutSequence();
+ document.querySelectorAll('.dock button[data-open]').forEach(b=>b.classList.toggle('dock-selected',b.dataset.open===section));
 }
 
-typeLine();
-
-
-// ======================
-// EXPANDABLE PROJECT CARDS
-// ======================
-const expandableCards = document.querySelectorAll(".expandable");
-
-expandableCards.forEach(card => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("open");
-  });
-});
-const askBtn = document.getElementById("ask-btn");
-const questionInput = document.getElementById("portfolio-question");
-const responseBox = document.getElementById("ai-response");
-const suggestionChips = document.querySelectorAll(".suggestion-chip");
-const suggestions = [
-  "Tell me about Savannah’s background",
-  "What roles is Savannah a good fit for?",
-  "What are Savannah’s strongest technical skills?",
-  "Tell me about the airline project",
-  "Explain the trend-to-campaign engine",
-  "How does Savannah turn data into decisions?",
-  "What experience does Savannah have?",
-  "Why should a recruiter hire Savannah?"
-];
-const input = document.getElementById("portfolio-question");
-const dropdown = document.getElementById("suggestions-dropdown");
-
-input.addEventListener("input", () => {
-  const value = input.value.toLowerCase();
-  dropdown.innerHTML = "";
-
-  if (!value) {
-    dropdown.classList.add("hidden");
-    return;
-  }
-
-  const filtered = suggestions.filter((s) =>
-    s.toLowerCase().includes(value)
-  );
-
-  if (filtered.length === 0) {
-    dropdown.classList.add("hidden");
-    return;
-  }
-
-  filtered.forEach((suggestion) => {
-    const div = document.createElement("div");
-    div.textContent = suggestion;
-
-    div.addEventListener("click", () => {
-      input.value = suggestion;
-      dropdown.classList.add("hidden");
-      document.getElementById("ai-response").textContent =
-        getPortfolioResponse(suggestion);
-    });
-
-    dropdown.appendChild(div);
-  });
-
-  dropdown.classList.remove("hidden");
-});
-const portfolioAnswers = [
-  {
-    keywords: ["about", "background", "who are you", "savannah"],
-    answer:
-      "I’m a Data & Decision Sciences (Informatics) student at Emory University focused on building data-driven systems that support real decision-making. My work spans machine learning, geospatial analysis, and full-stack product development, with an emphasis on turning complex data into usable tools and insights."
-  },
-
-  {
-    keywords: ["airline", "american airlines", "delay", "flight"],
-    answer:
-      "My American Airlines Delay Prediction project is a machine learning application built on 18,000+ flight records. I engineered features across routes and scheduling conditions, trained models with an AUC around 0.66, and deployed the results in a Streamlit app so users can interactively evaluate delay risk."
-  },
-
-  {
-    keywords: ["sprintwheel", "agile", "project management", "product"],
-    answer:
-      "SprintWheel is a full-stack agile project management platform I built using React, TypeScript, FastAPI, and Supabase. It supports sprint planning, backlog organization, and workflow tracking. I focused heavily on usability and designing systems that actually improve how teams execute work."
-  },
-
-  {
-    keywords: ["fresh food", "invest atlanta", "food access", "lila"],
-    answer:
-      "My fresh food access project combines geospatial and socioeconomic data to identify high-need Atlanta census tracts with limited access to fresh food. The goal was to support real investment decisions by translating complex spatial data into clear, tract-level insights."
-  },
-
-  {
-    keywords: ["fifa", "transit", "urban", "gis"],
-    answer:
-      "My FIFA 2026 project analyzes transit access and business disinvestment near Mercedes-Benz Stadium. I integrated multiple geospatial datasets to identify areas with high demand but limited access, helping surface opportunities for infrastructure and economic investment."
-  },
-
-  {
-    keywords: [ "ml", "models"],
-    answer:
-      "I’ve worked with regression, classification, clustering, and model evaluation, but I focus on making models usable. That means turning outputs into dashboards, decision tools, or systems that people can actually interact with—not just static results."
-  },
-
-  {
-    keywords: ["trend", "campaign", "marketing", "recommendation", "love island", "saltair"],
-    answer:
-      "I’m currently building a Trend-to-Campaign Recommendation Engine that translates real-time cultural signals into marketing strategy. It maps trends from platforms like TikTok and Google Trends to product categories, audiences, and campaign ideas, bridging data analysis with marketing and consumer behavior."
-  },
-
-  {
-    keywords: ["experience", "work", "job", "internship"],
-    answer:
-      "I currently work as a Student Technical Support Technician at Emory, where I’ve resolved 150+ technical issues and performed hardware diagnostics. I’m also an AI Fellow, where I work on evaluating and improving large language model outputs. Through the Data Science Club and AI Data Lab, I’ve led and contributed to multiple real-world data projects."
-  },
-
-  {
-    keywords: ["leadership", "team", "lead"],
-    answer:
-      "I’ve led data teams through projects like the airline delay analysis, where I guided workflow, analysis direction, and final delivery. I also contribute to operations and DEI initiatives through The Women’s Network, helping manage systems and improve team engagement."
-  },
-
-  {
-    keywords: ["skills", "tools", "tech stack"],
-    answer:
-      "I work with Python, SQL, JavaScript, React, TypeScript, FastAPI, Supabase, pandas, scikit-learn, geopandas, Streamlit, Tableau, Power BI, and Snowflake. My projects usually combine analytics, modeling, and product development."
-  },
-
-  {
-    keywords: ["roles", "career", "fit", "why hire"],
-    answer:
-      "I’m a strong fit for data analyst, marketing analytics, product analytics, and early-stage data science roles. What differentiates my work is that I don’t just analyze data—I build systems and tools that make insights usable for decision-making."
-  },
-  {
-  keywords: ["recruiter", "hire", "why hire", "stand out", "strong candidate"],
-  answer:
-    "Savannah stands out because she combines technical skill with applied decision-making. Her projects show experience with machine learning, geospatial analytics, Streamlit dashboards, and full-stack development, while her professional experience adds IT support, AI evaluation, and team leadership. She is strongest in roles where data, product thinking, and business strategy overlap."
-  },
-
-  {
-    keywords: ["resume", "linkedin", "profile"],
-    answer:
-      "My resume and LinkedIn highlight a mix of technical depth and applied experience across machine learning, geospatial analytics, and product development. I focus on building systems that connect data to real-world decisions, especially in areas like infrastructure, operations, and consumer behavior."
-  },
-  {
-    keywords:["spotify", "clustering", "music", "audio features", "python", "machine learning","scikit-learn"],
-    answer:
-      "I worked on a Spotify playlist clustering project using Python and scikit-learn. The goal was to group songs based on their audio features and user listening behavior, which could help improve recommendation algorithms."
-  }
-];
-const recruiterModeToggle = document.getElementById("recruiter-mode");
-
-function applyRecruiterMode(answer) {
-  const recruiterModeOn = recruiterModeToggle && recruiterModeToggle.checked;
-
-  if (!recruiterModeOn) {
-    return answer;
-  }
-
-  return `${answer}
-
-Recruiter takeaway: Savannah brings a strong mix of analytics, technical execution, and product thinking. Her experience across machine learning, geospatial analysis, full-stack development, IT support, and AI evaluation shows that she can work with data, build usable tools, communicate insights, and contribute in fast-moving team environments.`;
-}
-function getPortfolioResponse(question) {
-  const normalizedQuestion = question.toLowerCase().trim();
-
-  if (!normalizedQuestion) {
-    return applyRecruiterMode(
-      "You can ask about my projects, experience, technical skills, leadership, or the types of roles I’m targeting. Try something like 'Tell me about your airline project' or 'What roles are you a good fit for?'"
-    );
-  }
-
-  const match = portfolioAnswers.find((item) =>
-    item.keywords.some((keyword) => normalizedQuestion.includes(keyword))
-  );
-
-  if (match) {
-    return applyRecruiterMode(match.answer);
-  }
-
-  return applyRecruiterMode(
-    "I can answer questions about my projects, experience, skills, and career interests. Try asking about a specific project, my background, or what kinds of roles I’m targeting."
-  );
+/* About me profile: hide any photo that fails to load. */
+function wirePhotos(root){
+ root.querySelectorAll('img[data-photo]').forEach(img=>img.addEventListener('error',()=>img.closest('figure').remove()));
 }
 
-if (askBtn && questionInput && responseBox) {
-  askBtn.addEventListener("click", () => {
-    responseBox.textContent = getPortfolioResponse(questionInput.value);
-  });
-
-  questionInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      responseBox.textContent = getPortfolioResponse(questionInput.value);
-    }
-  });
+/* Check / Pass on the profile */
+function toast(message,action,target){
+ win.querySelector('.match-toast')?.remove();
+ const t=document.createElement('div');t.className='match-toast';t.setAttribute('role','status');
+ const m=document.createElement('p');m.textContent=message;
+ const go=document.createElement('button');go.type='button';go.className='primary-btn';go.textContent=action;go.dataset.open=target;
+ const x=document.createElement('button');x.type='button';x.className='text-btn';x.textContent='Keep looking';x.addEventListener('click',()=>t.remove());
+ t.append(m,go,x);win.append(t);go.focus({preventScroll:true});
 }
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".autocomplete-container")) {
-    dropdown.classList.add("hidden");
-  }
+
+function renderProjects(){
+ const grid=document.getElementById('project-grid');if(!grid)return;
+ const visible=projects.filter(p=>filter==='all'||p.category===filter);
+ grid.innerHTML=visible.map(p=>`<button class="project-card" data-project="${p.id}" aria-label="${escapeHtml(p.name)}">
+  <div class="project-preview ${p.color}">${p.image?`<img src="${escapeHtml(p.image)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="preview-ext">${escapeHtml(p.ext)}</span></div>
+  <div class="card-details"><span class="file-name">${escapeHtml(p.file)}</span>${p.award?`<span class="award">&#9733; Best Project Poster</span>`:''}<h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.short)}</p></div></button>`).join('');
+ count.textContent=`${visible.length} item${visible.length===1?'':'s'}`;
+ document.querySelectorAll('.filter').forEach(el=>el.classList.toggle('is-selected',el.dataset.filter===filter));
+ document.querySelectorAll('[data-count]').forEach(el=>{const c=el.dataset.count;el.textContent=projects.filter(p=>c==='all'||p.category===c).length;});
+ if(selected&&!visible.some(p=>p.id===selected))hideProject();
+}
+
+function showProject(id){
+ const p=projects.find(p=>p.id===id);if(!p)return;selected=id;
+ const detail=document.getElementById('project-detail');detail.hidden=false;
+ document.getElementById('project-grid').classList.add('has-detail');
+ detail.innerHTML=`<button class="detail-back" id="detail-back">&larr; All projects</button>
+ <div class="detail-hero ${p.color}">${p.image?`<img src="${escapeHtml(p.image)}" alt="Preview of ${escapeHtml(p.name)}" onerror="this.remove()">`:''}<span class="preview-ext">${escapeHtml(p.ext)}</span></div>
+ <span class="file-name">${escapeHtml(p.file)} &middot; ${escapeHtml(p.kind)}</span>
+ <h2>${escapeHtml(p.name)}</h2>${p.award?`<span class="award">&#9733; ${escapeHtml(p.award)}</span>`:''}<p>${escapeHtml(p.desc)}</p>
+ ${p.photo?`<figure class="detail-photo"><img src="${escapeHtml(p.photo)}" alt="${escapeHtml(p.photoCaption)}" loading="lazy" onerror="this.closest('figure').remove()"><figcaption>${escapeHtml(p.photoCaption)}</figcaption></figure>`:''}
+ <h3 class="detail-label">Built with</h3><div class="detail-tags">${p.tags.map(t=>`<span>${escapeHtml(t)}</span>`).join('')}</div>
+ <div class="detail-actions"><a class="primary-btn" href="${escapeHtml(p.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.linkText||'Open the live app')}</a>${p.secondary?`<a class="secondary-btn" href="${escapeHtml(p.secondary)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.secondaryText)}</a>`:''}</div>
+ <p class="external-note">Opens in a new tab.</p>`;
+ status.textContent=p.name;
+ content.scrollTop=0;
+ document.getElementById('detail-back').focus({preventScroll:true});
+}
+function hideProject(){selected=null;const detail=document.getElementById('project-detail');if(detail){detail.hidden=true;document.getElementById('project-grid').classList.remove('has-detail');}if(current==='projects')status.textContent=sections.projects.status;}
+
+function wireCompose(){
+ const form=document.getElementById('compose-form');
+ form.addEventListener('submit',e=>{e.preventDefault();
+  const subject=document.getElementById('compose-subject').value.trim()||'Hello';
+  const body=document.getElementById('compose-body').value.trim();
+  location.href=`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}${body?`&body=${encodeURIComponent(body)}`:''}`;
+ });
+ document.getElementById('copy-email').addEventListener('click',async e=>{
+  const btn=e.currentTarget;
+  try{await navigator.clipboard.writeText(EMAIL);btn.textContent='Copied';}
+  catch{btn.textContent=EMAIL;}
+  setTimeout(()=>{btn.textContent='Copy address';},2200);
+ });
+}
+
+document.addEventListener('click',event=>{
+ const open=event.target.closest('[data-open]');if(open){event.preventDefault();openSection(open.dataset.open);return;}
+ const go=event.target.closest('[data-goto]');if(go){filter='all';openSection('projects');showProject(go.dataset.goto);return;}
+ const item=event.target.closest('[data-project]');if(item){showProject(item.dataset.project);return;}
+ const filt=event.target.closest('[data-filter]');if(filt){filter=filt.dataset.filter;hideProject();renderProjects();return;}
+ if(event.target.closest('#detail-back')){hideProject();return;}
+ if(event.target.closest('#replay-errors')){startAboutSequence();return;}
+ if(event.target.closest('#profile-like')){toast('Looks like a good fit.','Send her a message','contact');return;}
+ if(event.target.closest('#profile-pass')){toast('Before you go: she has six live projects.','See the projects','projects');return;}
 });
-suggestionChips.forEach((chip) => {
-  chip.addEventListener("click", () => {
-    const text = chip.textContent;
-    questionInput.value = text;
-    responseBox.textContent = getPortfolioResponse(text);
-  });
-});
+document.getElementById('close-window').addEventListener('click',closeAll);
+document.getElementById('min-window').addEventListener('click',closeAll);
+document.getElementById('max-window').addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>{});});
+document.getElementById('back-button').addEventListener('click',()=>{if(current==='projects'&&selected){hideProject();return;}const prev=history.pop();if(prev)openSection(prev,false);else closeAll();});
+document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;if(activeDialog)skipAboutSequence();else if(selected)hideProject();else closeAll();});
+
+document.getElementById('year').textContent=new Date().getFullYear();
+const clockFmt=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'});
+function setTime(){document.getElementById('clock').textContent=clockFmt.format(new Date());}
+setTime();setInterval(setTime,30000);
+
+/* Hero: the name types itself, with one human typo */
+(function typeName(){
+ const h=document.querySelector('.type-name'),out=document.getElementById('typed');
+ if(!h||!out)return;
+ if(reducedMotion()){h.classList.add('is-done');return;}
+ // each step: [text to show, pause before the next step in ms]
+ const steps=[];let t='';
+ const type=(str,base=95)=>{for(const ch of str){t+=ch;steps.push([t,base+Math.random()*70+(ch===' '?140:0)]);}};
+ const back=n=>{for(let i=0;i<n;i++){t=t.slice(0,-1);steps.push([t,70]);}};
+ type('Savan');type('ha',80);steps[steps.length-1][1]=420; // typo, notice it
+ back(2);type('nah Drake');
+ out.textContent='';let i=0;
+ (function next(){if(i>=steps.length){h.classList.add('is-done');return;}out.textContent=steps[i][0];setTimeout(next,steps[i++][1]);})();
+ // a beat before the first key
+})();
+
+/* About me: one-time "system check" popups */
+const errorLayer=document.getElementById('error-layer');
+let popupDepth=130,deskDepth=4;
+function clearSequence(){sequenceTimers.forEach(clearTimeout);sequenceTimers=[];errorLayer.replaceChildren();activeDialog=null;win.removeAttribute('inert');}
+function closeAll(){win.querySelector('.match-toast')?.remove();content.querySelectorAll('video').forEach(v=>v.pause());clearSequence();current='home';history=[];selected=null;win.classList.remove('is-active');document.querySelectorAll('.dock button[data-open]').forEach(b=>b.classList.remove('dock-selected'));if(lastTrigger)lastTrigger.focus({preventScroll:true});}
+function delay(fn,ms){sequenceTimers.push(setTimeout(fn,ms));}
+function errorWindow(file,heading,message,offsetX,offsetY,isFinal=false){
+ const pop=document.createElement('div');pop.className='error-popup'+(isFinal?' error-final':'');pop.style.zIndex=String(++popupDepth);pop.setAttribute('role','dialog');pop.setAttribute('aria-label',heading);
+ const bar=document.createElement('div');bar.className='error-titlebar';
+ const caption=document.createElement('span');caption.textContent=file;
+ const dismiss=document.createElement('button');dismiss.type='button';dismiss.textContent='×';dismiss.className='error-dismiss';dismiss.setAttribute('aria-label','Skip the system check');dismiss.addEventListener('click',skipAboutSequence);
+ bar.append(caption,dismiss);
+ const body=document.createElement('div');body.className='error-body';
+ const h=document.createElement('h2');h.textContent=heading;const p=document.createElement('p');p.textContent=message;body.append(h,p);
+ if(isFinal){const proceed=document.createElement('button');proceed.type='button';proceed.className='proceed-button';proceed.textContent='Proceed anyway';proceed.addEventListener('click',skipAboutSequence);body.append(proceed);}
+ pop.append(bar,body);errorLayer.append(pop);
+ const maxX=Math.max(8,innerWidth-pop.offsetWidth-8),maxY=Math.max(65,innerHeight-pop.offsetHeight-90);
+ pop.style.left=Math.min(maxX,Math.max(8,(innerWidth-pop.offsetWidth)/2+offsetX))+'px';
+ pop.style.top=Math.min(maxY,Math.max(65,(innerHeight-pop.offsetHeight)/2+offsetY))+'px';
+ makeDraggable(pop,bar);activeDialog=pop;if(isFinal)pop.querySelector('.proceed-button').focus();return pop;
+}
+const FINAL=['verify_human.exe','I am not a robot.','Checked twice. Just a person who likes data and likes making it look good.'];
+function startAboutSequence(){
+ clearSequence();aboutSeen=true;win.setAttribute('inert','');
+ if(reducedMotion()){errorWindow(...FINAL,0,0,true);return;}
+ delay(()=>errorWindow('scan_user.exe','Scan complete','Interests detected: data, design, beauty, culture, technology. Expected: one.',-110,-125),250);
+ delay(()=>errorWindow('job_title.exe','Could not assign a job title','Tried: analyst, engineer, designer. All three partially matched.',95,-35),850);
+ delay(()=>errorWindow('browser.exe','Too many tabs','Several of them are Streamlit apps she built herself.',-60,65),1450);
+ delay(()=>errorWindow(...FINAL,0,0,true),2400);
+}
+function skipAboutSequence(){clearSequence();if(win.classList.contains('is-active'))win.focus({preventScroll:true});}
+
+/* Dragging: popups, and the sticky note + polaroid on the desktop */
+function makeDraggable(element,handle){
+ let sx=0,sy=0,left=0,top=0,dragging=false;
+ handle.addEventListener('pointerdown',e=>{
+  if(e.button!==0||e.target.closest('button,a,input,textarea')||innerWidth<=650)return;
+  const r=element.getBoundingClientRect(),parent=element.offsetParent?element.offsetParent.getBoundingClientRect():{left:0,top:0};
+  sx=e.clientX;sy=e.clientY;left=r.left-parent.left;top=r.top-parent.top;
+  element.style.left=left+'px';element.style.top=top+'px';element.style.right='auto';element.style.bottom='auto';element.style.transform=element.classList.contains('desk-object')?'rotate(var(--r))':'none';element.style.margin='0';
+  if(element.classList.contains('desk-object'))element.style.zIndex=String(++deskDepth);
+  dragging=true;element.classList.add('is-dragging');handle.setPointerCapture(e.pointerId);
+ });
+ handle.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  element.style.left=(left+e.clientX-sx)+'px';element.style.top=Math.max(element.classList.contains('desk-object')?0:56,top+e.clientY-sy)+'px';
+ });
+ const stop=()=>{dragging=false;element.classList.remove('is-dragging');};
+ handle.addEventListener('pointerup',stop);handle.addEventListener('pointercancel',stop);
+}
+document.querySelectorAll('.desk-object').forEach(el=>makeDraggable(el,el));
+
+document.addEventListener('pointerdown',e=>{const t=e.target.closest('[data-open]');if(t)lastTrigger=t;},true);
