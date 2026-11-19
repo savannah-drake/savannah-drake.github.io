@@ -8,16 +8,19 @@ I'm a data science student at Emory University (Informatics track, graduating De
 
 ## What's inside
 
-- **Desktop:** folders, my résumé, a to-do sticky note and a polaroid you can drag around. Check the trash too.
-- **About me:** a quick "system check," then a profile with photos, prompts and an internship fit check.
-- **Projects:** six projects, most with a live app you can open, including American Airlines delay prediction, a Fresh Food Access dashboard that won Best Project Poster at Emory's AI/Data Lab Symposium, and a FIFA 2026 transit and investment analysis.
+A pink scrapbook desktop with sticker labels, tape, polaroids and a dock.
+
+- **Desktop:** my name types itself out, an ID badge swings in on its lanyard, and a to-do note sits nearby. You can drag both. Check the trash too.
+- **About me:** a quick "system check," then my info card, polaroids, prompts, an internship fit check and a "worked with" row.
+- **Analytics:** my impact in numbers, with live dashboards on phone screens.
+- **Projects:** six hand-picked projects, most with a live app you can open, including American Airlines delay prediction, a Fresh Food Access dashboard that won Best Project Poster at Emory's AI/Data Lab Symposium, and a FIFA 2026 transit and investment analysis.
 - **Experience:** my roles, coursework and leadership.
-- **Toolkit:** my skills written as a `requirements.txt`, with each one linked to the project where I used it.
-- **Contact:** write a message that opens in your own email app.
+- **Toolkit:** my skills as receipts, with each tool "priced" with the project where I used it.
+- **Messages:** a text thread where you can write to me, and it opens in your email app.
 
 ## Built with
 
-Plain HTML, CSS and JavaScript, with no frameworks or build step. Deployed on GitHub Pages, so every commit to `main` goes live automatically. Fonts are Fraunces, Bricolage Grotesque, Caveat and DM Mono from Google Fonts.
+Plain HTML, CSS and JavaScript, with no frameworks or build step. Deployed on GitHub Pages, so every commit to `main` goes live automatically. Fonts are Archivo, Fraunces, Caveat and DM Mono from Google Fonts.
 
 ## Files
 
@@ -31,6 +34,7 @@ Plain HTML, CSS and JavaScript, with no frameworks or build step. Deployed on Gi
 | `assets/` | Project screenshots and research posters |
 
 ## Updating the site
+
 
 - **Projects:** edit the `projects` array at the top of `script.js`.
 - **Page text:** edit the matching `<template>` in `index.html`, for example `about-template` or `experience-template`.
